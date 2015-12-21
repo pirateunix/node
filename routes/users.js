@@ -16,8 +16,11 @@ router.post('/login', function *(next) {
         var password = md5(req.password + result[0].salt);
         //сверяю хэш из БД с хэшем пароля, введенного пользователем
         if (password == result[0].password) {
-            //Помещаю имя пользователя в сессию
-            this.session.username = req.username;
+            //Помещаю случайный хэш в базу и сессию
+            var rand = randomInt(1000, 9000);
+            var online = md5(rand);
+            yield dbQuery.updateOnline(online,req.username);
+            this.session.online = online;
             this.redirect('/');
         } else {
             this.throw("password incorrect");
@@ -59,7 +62,11 @@ router.post('/isreg', function *(next) {
                 var password = md5(req.password + salt);
                 //Добавляем пользователя в БД
                 yield dbQuery.addUser(req.username, req.name, password, salt, req.mai);
-                this.session.username = req.username;
+                //Помещаю случайный хэш в базу и сессию
+                var rand = randomInt(1000, 9000);
+                var online = md5(rand);
+                yield dbQuery.updateOnline(online,req.username);
+                this.session.online = online;
                 this.redirect('/');
             }
 

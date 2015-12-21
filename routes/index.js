@@ -4,11 +4,11 @@ router.get('/', function *(next) {
     var template = {
         auth: false
     };
-    if (this.session.username) {
+    if (this.state.username) {
         template = {
             title: 'My app!',
             auth: true,
-            name: this.session.username
+            name: this.state.username
         }
     }
     yield this.render('index', template);

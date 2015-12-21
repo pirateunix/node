@@ -17,10 +17,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `salt` varchar(3) NOT NULL,
   `mail` varchar(50) NOT NULL,
   `rights` smallint(1) NOT NULL,
+  `online` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 Авторизация и регистрация пользователя. Проект создан с помощью koa-generator и с использованием фрэймвёрка Koa.
 В качетсве шаблонизатора был выбран handlebars. Необходимые настройки вынесены в configs/config.json.
 Создал модели для работы с БД, для проверки введеных пользователем данных. errorHandler - мой middleware,
-создан для отслеживания ошибок и вывода их. Настроены роутеры: в users.js выполняется авторизация и регистрация пользователей.
+создан для отслеживания ошибок и вывода их. Middleware online Сверяет хэш из сессии с хэшом из базы и выставляет this.state.
+Настроены роутеры: в users.js выполняется авторизация и регистрация пользователей.

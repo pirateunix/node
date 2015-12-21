@@ -23,6 +23,7 @@ app.use(hbs.middleware({
 }));
 
 app.use(require('./models/errorHandler'));
+app.use(require('./models/online'));
 app.use(require('koa-bodyparser')());
 app.use(json());
 app.use(logger());

@@ -17,7 +17,21 @@ function *addUser(username, name, password, salt, mail) {
     return result;
 }
 
+function *updateOnline(online, username) {
+    var sql = 'UPDATE user SET online = \'' + online + '\' WHERE login = \'' + username + '\';';
+    var result = yield query(sql);
+    return result;
+}
+
+function *checkOnline(online) {
+    var sql = 'SELECT * from user WHERE online =\'' + online + '\';';
+    var result = yield query(sql);
+    return result;
+}
+
 module.exports = {
     getUser: getUser,
-    addUser: addUser
+    addUser: addUser,
+    updateOnline: updateOnline,
+    checkOnline: checkOnline
 }
