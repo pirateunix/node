@@ -1,13 +1,24 @@
-Для разворачивания проекта необходимо:
+## Описание
+Авторизация и регистрация пользователя. Проект создан с помощью koa-generator и с использованием фрэймвёрка Koa.
+В качетсве шаблонизатора был выбран handlebars. Необходимые настройки вынесены в configs/config.json.
+Создал модели для работы с БД, для проверки введеных пользователем данных. errorHandler - мой middleware,
+создан для отслеживания ошибок и вывода их. Middleware online Сверяет хэш из сессии с хэшом из базы и выставляет this.state.
+Настроены роутеры: в users.js выполняется авторизация и регистрация пользователей.
 
-$git clone https://github.com/pirateunix/node.git
-$cd node
-$npm i
-$npm start
+## Развертывание
 
-http://localhost:5000/
+```git clone https://github.com/pirateunix/node.git```
 
-Coздать БД node и создать таблицу:
+```cd node```
+
+```npm i```
+
+```npm start```
+
+[http://localhost:5000/](http://localhost:5000/)
+
+## Coздать БД node и создать таблицу:
+```
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text CHARACTER SET utf8,
@@ -20,9 +31,4 @@ CREATE TABLE IF NOT EXISTS `user` (
   `online` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
-Авторизация и регистрация пользователя. Проект создан с помощью koa-generator и с использованием фрэймвёрка Koa.
-В качетсве шаблонизатора был выбран handlebars. Необходимые настройки вынесены в configs/config.json.
-Создал модели для работы с БД, для проверки введеных пользователем данных. errorHandler - мой middleware,
-создан для отслеживания ошибок и вывода их. Middleware online Сверяет хэш из сессии с хэшом из базы и выставляет this.state.
-Настроены роутеры: в users.js выполняется авторизация и регистрация пользователей.
+```
